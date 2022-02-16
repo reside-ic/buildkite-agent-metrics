@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -e
+
+PACKAGE_ROOT=$(realpath $HERE/..)
+PACKAGE_ORG=reside
+PACKAGE_NAME=buildkite-agent-metrics
+NAME_TEST=test_metrics
+TAG_TEST="${PACKAGE_ORG}/${PACKAGE_NAME}:test"
+TAG_LATEST="${PACKAGE_ORG}/${PACKAGE_NAME}:latest"

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -ex
+
+HERE=$(dirname $0)
+. $HERE/common
+
+function cleanup {
+    echo "Cleaning up"
+    rm -rf $PACKAGE_ROOT/buildkite-agent-metrics
+}
+trap cleanup EXIT
+
+git clone https://github.com/buildkite/buildkite-agent-metrics.git
+
+docker build \
+       -t $TAG_TEST \
+       -f buildkite-agent-metrics/Dockerfile \
+       $PACKAGE_ROOT/buildkite-agent-metrics
+
+docker push $TAG_TEST

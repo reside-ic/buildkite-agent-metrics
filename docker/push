@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -ex
+
+HERE=$(dirname $0)
+. $HERE/common
+
+# In case we switch agents between steps
+[ ! -z $(docker images -q $TAG_TEST) ] || docker pull $TAG_TEST
+
+docker tag $TAG_TEST $TAG_LATEST
+docker push $TAG_LATEST

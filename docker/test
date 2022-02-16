@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -ex
+HERE=$(dirname $0)
+. $HERE/common
+
+function cleanup {
+    echo "Cleaning up"
+    docker kill $NAME_TEST > /dev/null || true
+}
+trap cleanup EXIT
+
+docker run --rm \
+       --name $NAME_TEST \
+       $TAG_TEST \
+       -version \
